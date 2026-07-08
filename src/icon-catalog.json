@@ -1,0 +1,26 @@
+[
+  {
+    "name": "IconArrowRight",
+    "exportName": "IconArrowRight"
+  },
+  {
+    "name": "IconCheck",
+    "exportName": "IconCheck"
+  },
+  {
+    "name": "IconClose",
+    "exportName": "IconClose"
+  },
+  {
+    "name": "IconMenu",
+    "exportName": "IconMenu"
+  },
+  {
+    "name": "IconSearch",
+    "exportName": "IconSearch"
+  },
+  {
+    "name": "IconUserAdd",
+    "exportName": "IconUserAdd"
+  }
+]

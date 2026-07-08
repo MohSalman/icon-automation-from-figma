@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationDir": "dist/esm",
+    "emitDeclarationOnly": true,
+    "outDir": "dist/esm",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // Without this, TS treats every package under node_modules/@types as an
+    // implicit global — including @types/mdx, which only exists because
+    // @storybook/addon-docs depends on it and has nothing to do with this
+    // package's own source.
+    "types": ["react"]
+  },
+  "include": ["src"],
+  "exclude": ["src/stories", "dist", "node_modules"]
+}
