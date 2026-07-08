@@ -12,6 +12,14 @@
     "exportName": "IconClose"
   },
   {
+    "name": "IconHospital",
+    "exportName": "IconHospital"
+  },
+  {
+    "name": "IconMale",
+    "exportName": "IconMale"
+  },
+  {
     "name": "IconMenu",
     "exportName": "IconMenu"
   },

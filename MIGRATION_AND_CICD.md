@@ -6,9 +6,8 @@ one up as a personal/demo project: your own Figma account, your own GitHub
 repo, published to the public npm registry under your own account — no
 shared design team, no internal Nexus registry.
 
-The package itself lives in
-[`icon-automation-from-figma/`](icon-automation-from-figma/) and is built
-and verified — see "Current status" below for exactly what that means.
+This package is built and verified — see "Current status" below for
+exactly what that means.
 
 ---
 
@@ -16,9 +15,9 @@ and verified — see "Current status" below for exactly what that means.
 
 | Stage | Status |
 |---|---|
-| Package scaffold (build, types, tree-shaking config) | **Done.** Builds, type-checks, lints, and passes the duplicate-hash gate. Ships with 6 hand-written sample icons in the exact shape the Figma pipeline would generate, so the package is usable today without live Figma access. |
-| Figma pipeline wiring | **Config and scripts done; not yet run against a real file.** `.figma-export.cjs` and `scripts/export-from-figma.cjs` are in place. Blocked on you supplying a real `FIGMA_TOKEN` and `FIGMA_FILE_KEY` — see §2. |
-| GitHub Actions CI/CD | **Done.** `.github/workflows/ci.yml` (validate on push/PR) and `.github/workflows/release.yml` (export + publish) are in place. |
+| Package scaffold (build, types, tree-shaking config) | **Done.** Builds, type-checks, lints, and passes the duplicate-hash gate. |
+| Figma pipeline wiring | **Done and run against a real Figma file.** `.figma-export.cjs` pulls real components, converts them through SVGR into the same `IconProps` (`size`/`color`) shape as the hand-written sample icons, and regenerates the barrel. See §2 for the exact API details this depends on. |
+| GitHub Actions CI/CD | **Done.** `.github/workflows/ci.yml` (validate on push/PR) and `.github/workflows/release.yml` (export + publish) are in place; not yet run in Actions itself (only run locally so far). |
 | Publish to npmjs.org | **Not yet run.** Needs an `NPM_TOKEN` secret — see §3. |
 | Migrate a consuming app onto this package | **Not started** — that happens in whatever app repo ends up importing this package, not here. |
 
@@ -32,17 +31,21 @@ and verified — see "Current status" below for exactly what that means.
    named `icon/<category>/<name>` — e.g. `icon/navigation/arrow-right`.
    `.figma-export.cjs` filters on this exact pattern
    (`^icon\/([\w-]+)\/([\w-]+)$`) and silently skips anything that doesn't
-   match.
-3. Keep each icon on a clean 24×24 frame, single-color where possible, so
-   the pipeline's `replaceAttrValues` fill-normalization step can safely
-   convert hardcoded fills to `currentColor`.
+   match. Figma component names use `/` as a path separator, and
+   `@figma-export/core` splits on it via `node:path` — `icon/gender/male`
+   becomes `dirname: "icon/gender"`, `basename: "male"`.
+3. Keep each icon on a clean 24×24 frame — color doesn't matter. The
+   pipeline force-converts *every* fill/stroke color to `currentColor`
+   (not just literal black), via a custom SVGO `convertColors` predicate
+   that matches unconditionally, so design can use any color as a
+   placeholder and it still resolves to `currentColor` in code.
 4. Generate a **Figma Personal Access Token**: Figma → account Settings →
    Personal access tokens.
 5. Get the **file key** from your Figma file's URL:
    `https://www.figma.com/file/<FILE_KEY>/...`.
 6. Copy `icon-automation-from-figma/.env.example` to `.env` for local
    testing (gitignored — never commit real tokens).
-7. Run the export once locally before trusting CI with it:
+7. Run the export:
 
    ```bash
    cd icon-automation-from-figma
@@ -53,14 +56,58 @@ and verified — see "Current status" below for exactly what that means.
    npm run build            # confirm it still compiles
    ```
 
-### Known gap to close before trusting this unattended
+### API details this depends on (verified directly, not just documented)
 
-`.figma-export.cjs` and `scripts/export-from-figma.cjs` are written against
-the documented `@figma-export/core` v6 API (`components()`,
-`filterComponent`, `transformComponentsToOutput`, the SVGR outputter's
-`getComponentName`/`options`). This has **not been run against a real
-Figma file** — do a supervised first run and diff the output against the 6
-sample icons' shape before relying on the scheduled workflow unattended.
+`@figma-export/core`'s `components()` function does **not** read
+`FIGMA_TOKEN` from the environment itself — it only reads a `token` field
+on the config object passed to it. `.figma-export.cjs` forwards
+`process.env.FIGMA_TOKEN` into that field explicitly; without it, the
+export fails immediately with `'Access Token' is missing`.
+
+`@figma-export/output-components-as-svgr`'s SVGR integration also needs
+more than it first appears:
+
+- `@svgr/core`'s `transform()` runs **zero transforms** unless you pass an
+  explicit `plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx']` — omit it
+  and every icon is written out as untransformed, invalid raw SVG XML
+  inside a `.tsx` file. Both plugins are separate npm packages (not
+  bundled with `@svgr/core` or the figma-export outputter) and are
+  declared as direct devDependencies here for that reason.
+- The outputter's `getComponentName`/`getDirname`/etc. callbacks receive
+  the whole per-component `options` object (`{ pageName, componentName,
+  dirname, basename }`), not a plain name string.
+- Default output nests files under `<output>/<pageName>/<dirname>/` using
+  a `.jsx` extension. `.figma-export.cjs` overrides `getDirname: () => ''`
+  to flatten into `src/icons/` directly, and `getFileExtension: () =>
+  '.tsx'` for TypeScript output.
+- To get the same `size`/`color` prop contract as the hand-written sample
+  icons (`export function IconX({ size, color, ...props }: IconProps)`),
+  the config sets `jsxRuntime: 'automatic'` (no manual `React` import),
+  `dimensions: false` + `svgProps: { width: '{size}', height: '{size}' }`
+  (SVGR's built-in dimension handling ignores `replaceAttrValues` for
+  width/height, so injecting them via `svgProps` is the reliable path),
+  and a custom `template` function that wraps the generated JSX in our own
+  function signature instead of SVGR's default export.
+- The outputter always writes its own per-directory barrel file
+  (`index.ts`/`index.js`). `scripts/export-from-figma.cjs` deletes it
+  after every export — the real barrel is regenerated separately by
+  `npm run build:catalog`, which also covers hand-written icons.
+
+This was all confirmed by running a real export against a personal Figma
+file with two live icons (`icon/gender/male`, `icon/building/hospital`)
+and checking the generated `.tsx` output matched the hand-written sample
+icons' shape exactly, then running it through `check:duplicates`,
+`typecheck`, `lint`, `build`, and `build-storybook`.
+
+### One real limitation to know about
+
+Filenames and export names are derived from `basename` alone (per the
+proposal's own naming convention, category is dropped) — two icons in
+different categories with the same basename (e.g. `icon/a/close` and
+`icon/b/close`) will silently overwrite each other's output file. The
+duplicate-hash gate catches identical *content* under different names, not
+this case. Worth a naming convention rule for design (no repeated
+basenames across categories) if the icon set grows past a couple dozen.
 
 ---
 

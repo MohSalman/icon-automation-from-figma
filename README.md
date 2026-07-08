@@ -1,7 +1,7 @@
 # icon-automation-from-figma
 
 Tree-shakable React icon package generated from Figma. See
-[`../MIGRATION_AND_CICD.md`](../MIGRATION_AND_CICD.md) for the full Figma
+[`MIGRATION_AND_CICD.md`](MIGRATION_AND_CICD.md) for the full Figma
 connection and CI/CD rollout plan this package implements.
 
 ## Install
@@ -32,10 +32,13 @@ npm run check:duplicates    # fails if two icons render identical SVG markup
    npm run build:catalog  # regenerates src/index.ts and src/icon-catalog.json
    ```
 
-Until real credentials are supplied, `src/icons/` ships with six hand-written
-sample icons (`ArrowRight`, `Menu`, `UserAdd`, `Check`, `Close`, `Search`) in
-the exact shape `@figma-export/output-components-as-svgr` produces, so
-Storybook and the build work out of the box.
+`src/icons/` ships with six hand-written sample icons (`ArrowRight`,
+`Menu`, `UserAdd`, `Check`, `Close`, `Search`) alongside whatever's been
+pulled from Figma, all in the same `IconProps` (`size`/`color`) shape —
+Storybook and the build work with or without a Figma connection. See
+[`MIGRATION_AND_CICD.md`](MIGRATION_AND_CICD.md) §2 for the real
+`@figma-export`/SVGR API details this depends on (several didn't work the
+way the packages' own defaults suggest).
 
 ## Why this tree-shakes
 
@@ -62,5 +65,5 @@ function Footer() {
 GitHub Actions (`.github/workflows/release.yml`) runs the full
 export → validate → publish pipeline to the public npm registry
 (registry.npmjs.org) under your own npm account. See
-[`../MIGRATION_AND_CICD.md`](../MIGRATION_AND_CICD.md) for pipeline details,
+[`MIGRATION_AND_CICD.md`](MIGRATION_AND_CICD.md) for pipeline details,
 required secrets, and versioning policy.
