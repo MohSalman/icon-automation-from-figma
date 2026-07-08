@@ -3,6 +3,7 @@ export type { IconProps } from './Icon';
 export { IconArrowRight } from './icons/ArrowRight';
 export { IconCheck } from './icons/Check';
 export { IconClose } from './icons/Close';
+export { IconFemale } from './icons/Female';
 export { IconHospital } from './icons/Hospital';
 export { IconMale } from './icons/Male';
 export { IconMenu } from './icons/Menu';
