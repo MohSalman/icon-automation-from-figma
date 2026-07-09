@@ -12,6 +12,10 @@
     "exportName": "IconClose"
   },
   {
+    "name": "IconDelete",
+    "exportName": "IconDelete"
+  },
+  {
     "name": "IconFemale",
     "exportName": "IconFemale"
   },
