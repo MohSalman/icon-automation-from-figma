@@ -46,6 +46,9 @@ exactly what that means.
 6. Copy `icon-automation-from-figma/.env.example` to `.env` for local
    testing (gitignored — never commit real tokens).
 7. Run the export:
+   set -a
+   source .env
+   set +a
 
    ```bash
    cd icon-automation-from-figma
