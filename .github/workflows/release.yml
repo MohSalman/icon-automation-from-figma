@@ -2,10 +2,6 @@ name: Export from Figma & Release
 
 on:
   workflow_dispatch: {}
-  # Nightly, so a batch of icons approved in Figma doesn't sit unpublished
-  # for long. Adjust or remove once this is proven out.
-  schedule:
-    - cron: '0 2 * * *'
 
 permissions:
   contents: write

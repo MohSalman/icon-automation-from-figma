@@ -13,13 +13,13 @@ exactly what that means.
 
 ## 1. Current status
 
-| Stage | Status |
-|---|---|
-| Package scaffold (build, types, tree-shaking config) | **Done.** Builds, type-checks, lints, and passes the duplicate-hash gate. |
-| Figma pipeline wiring | **Done and run against a real Figma file.** `.figma-export.cjs` pulls real components, converts them through SVGR into the same `IconProps` (`size`/`color`) shape as the hand-written sample icons, and regenerates the barrel. See §2 for the exact API details this depends on. |
-| GitHub Actions CI/CD | **Done.** `.github/workflows/ci.yml` (validate on push/PR) and `.github/workflows/release.yml` (export + publish) are in place; not yet run in Actions itself (only run locally so far). |
-| Publish to npmjs.org | **Not yet run.** Needs an `NPM_TOKEN` secret — see §3. |
-| Migrate a consuming app onto this package | **Not started** — that happens in whatever app repo ends up importing this package, not here. |
+| Stage                                                | Status                                                                                                                                                                                                                                                                             |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Package scaffold (build, types, tree-shaking config) | **Done.** Builds, type-checks, lints, and passes the duplicate-hash gate.                                                                                                                                                                                                          |
+| Figma pipeline wiring                                | **Done and run against a real Figma file.** `.figma-export.cjs` pulls real components, converts them through SVGR into the same `IconProps` (`size`/`color`) shape as the hand-written sample icons, and regenerates the barrel. See §2 for the exact API details this depends on. |
+| GitHub Actions CI/CD                                 | **Done.** `.github/workflows/ci.yml` (validate on push/PR) and `.github/workflows/release.yml` (export + publish) are in place; not yet run in Actions itself (only run locally so far).                                                                                           |
+| Publish to npmjs.org                                 | **Not yet run.** Needs an `NPM_TOKEN` secret — see §3.                                                                                                                                                                                                                             |
+| Migrate a consuming app onto this package            | **Not started** — that happens in whatever app repo ends up importing this package, not here.                                                                                                                                                                                      |
 
 ---
 
@@ -35,7 +35,7 @@ exactly what that means.
    `@figma-export/core` splits on it via `node:path` — `icon/gender/male`
    becomes `dirname: "icon/gender"`, `basename: "male"`.
 3. Keep each icon on a clean 24×24 frame — color doesn't matter. The
-   pipeline force-converts *every* fill/stroke color to `currentColor`
+   pipeline force-converts _every_ fill/stroke color to `currentColor`
    (not just literal black), via a custom SVGO `convertColors` predicate
    that matches unconditionally, so design can use any color as a
    placeholder and it still resolves to `currentColor` in code.
@@ -78,11 +78,11 @@ more than it first appears:
   declared as direct devDependencies here for that reason.
 - The outputter's `getComponentName`/`getDirname`/etc. callbacks receive
   the whole per-component `options` object (`{ pageName, componentName,
-  dirname, basename }`), not a plain name string.
+dirname, basename }`), not a plain name string.
 - Default output nests files under `<output>/<pageName>/<dirname>/` using
   a `.jsx` extension. `.figma-export.cjs` overrides `getDirname: () => ''`
   to flatten into `src/icons/` directly, and `getFileExtension: () =>
-  '.tsx'` for TypeScript output.
+'.tsx'` for TypeScript output.
 - To get the same `size`/`color` prop contract as the hand-written sample
   icons (`export function IconX({ size, color, ...props }: IconProps)`),
   the config sets `jsxRuntime: 'automatic'` (no manual `React` import),
@@ -108,7 +108,7 @@ Filenames and export names are derived from `basename` alone (per the
 proposal's own naming convention, category is dropped) — two icons in
 different categories with the same basename (e.g. `icon/a/close` and
 `icon/b/close`) will silently overwrite each other's output file. The
-duplicate-hash gate catches identical *content* under different names, not
+duplicate-hash gate catches identical _content_ under different names, not
 this case. Worth a naming convention rule for design (no repeated
 basenames across categories) if the icon set grows past a couple dozen.
 
@@ -129,6 +129,8 @@ basenames across categories) if the icon set grows past a couple dozen.
    (`icon-automation-from-figma`) to the public registry under your account.
 
 ---
+
+`
 
 ## 4. CI/CD pipeline
 
@@ -163,7 +165,7 @@ Figma connection is proven out. Steps:
 ### Build order gotcha (already hit and fixed here)
 
 `vite.config.ts` sets `build.emptyOutDir: true`. If `tsc
---emitDeclarationOnly` runs *before* `vite build`, Vite deletes the `.d.ts`
+--emitDeclarationOnly` runs _before_ `vite build`, Vite deletes the `.d.ts`
 files it just wrote. The `build` script in `package.json` is ordered
 `build:catalog && vite build && tsc --emitDeclarationOnly` — keep it in
 that order if this ever gets refactored.
@@ -174,14 +176,14 @@ Two settings, both already in place:
 
 - `vite.config.ts` builds **one Rollup entry per source file** (via a
   `fast-glob` scan of `src/**/*.{ts,tsx}`) with `output.preserveModules:
-  true` — so `dist/esm/` ends up with one `.js` file per icon, not a single
+true` — so `dist/esm/` ends up with one `.js` file per icon, not a single
   bundled `index.js`.
 - `package.json` sets `"sideEffects": false`, telling downstream bundlers
   it's safe to drop any icon module a consumer doesn't import.
 
 This was confirmed directly, not just asserted: building the package and
 then bundling a throwaway consumer that imports only `IconArrowRight` with
-esbuild produces a 559-byte output containing *only* `IconArrowRight` — the
+esbuild produces a 559-byte output containing _only_ `IconArrowRight` — the
 other five sample icons don't appear in the bundle at all.
 
 ---
@@ -208,7 +210,7 @@ npm install icon-automation-from-figma
 ```
 
 ```tsx
-import { IconArrowRight } from 'icon-automation-from-figma';
+import { IconArrowRight } from "icon-automation-from-figma";
 
 function Footer() {
   return <IconArrowRight size={20} color="currentColor" />;
