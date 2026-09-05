@@ -38,5 +38,9 @@
   {
     "name": "IconUserAdd",
     "exportName": "IconUserAdd"
+  },
+  {
+    "name": "IconUsertag",
+    "exportName": "IconUsertag"
   }
 ]

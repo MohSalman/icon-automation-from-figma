@@ -10,3 +10,4 @@ export { IconMale } from './icons/Male';
 export { IconMenu } from './icons/Menu';
 export { IconSearch } from './icons/Search';
 export { IconUserAdd } from './icons/UserAdd';
+export { IconUsertag } from './icons/Usertag';
