@@ -1,7 +1,59 @@
 [
   {
+    "name": "IconArchive",
+    "exportName": "IconArchive"
+  },
+  {
     "name": "IconArrowRight",
     "exportName": "IconArrowRight"
+  },
+  {
+    "name": "IconCard",
+    "exportName": "IconCard"
+  },
+  {
+    "name": "IconCardAdd",
+    "exportName": "IconCardAdd"
+  },
+  {
+    "name": "IconCardCoin",
+    "exportName": "IconCardCoin"
+  },
+  {
+    "name": "IconCardEdit",
+    "exportName": "IconCardEdit"
+  },
+  {
+    "name": "IconCardPos",
+    "exportName": "IconCardPos"
+  },
+  {
+    "name": "IconCardReceive",
+    "exportName": "IconCardReceive"
+  },
+  {
+    "name": "IconCardRemove",
+    "exportName": "IconCardRemove"
+  },
+  {
+    "name": "IconCardSend",
+    "exportName": "IconCardSend"
+  },
+  {
+    "name": "IconCardSlash",
+    "exportName": "IconCardSlash"
+  },
+  {
+    "name": "IconCardTick",
+    "exportName": "IconCardTick"
+  },
+  {
+    "name": "IconCards",
+    "exportName": "IconCards"
+  },
+  {
+    "name": "IconChartSquare",
+    "exportName": "IconChartSquare"
   },
   {
     "name": "IconCheck",
@@ -12,8 +64,60 @@
     "exportName": "IconClose"
   },
   {
+    "name": "IconCoin",
+    "exportName": "IconCoin"
+  },
+  {
+    "name": "IconConvertCard",
+    "exportName": "IconConvertCard"
+  },
+  {
     "name": "IconDelete",
     "exportName": "IconDelete"
+  },
+  {
+    "name": "IconDiscountCircle",
+    "exportName": "IconDiscountCircle"
+  },
+  {
+    "name": "IconDiscountShape",
+    "exportName": "IconDiscountShape"
+  },
+  {
+    "name": "IconDocument",
+    "exportName": "IconDocument"
+  },
+  {
+    "name": "IconDollarCircle",
+    "exportName": "IconDollarCircle"
+  },
+  {
+    "name": "IconDollarSquare",
+    "exportName": "IconDollarSquare"
+  },
+  {
+    "name": "IconEmptyWallet",
+    "exportName": "IconEmptyWallet"
+  },
+  {
+    "name": "IconEmptyWalletAdd",
+    "exportName": "IconEmptyWalletAdd"
+  },
+  {
+    "name": "IconEmptyWalletChange",
+    "exportName": "IconEmptyWalletChange"
+  },
+  {
+    "name": "IconEmptyWalletRemove",
+    "exportName": "IconEmptyWalletRemove"
+  },
+  {
+    "name": "IconEmptyWalletTick",
+    "exportName": "IconEmptyWalletTick"
+  },
+  {
+    "name": "IconEmptyWalletTime",
+    "exportName": "IconEmptyWalletTime"
   },
   {
     "name": "IconFemale",
@@ -28,12 +132,160 @@
     "exportName": "IconMale"
   },
   {
+    "name": "IconMath",
+    "exportName": "IconMath"
+  },
+  {
     "name": "IconMenu",
     "exportName": "IconMenu"
   },
   {
+    "name": "IconMoney",
+    "exportName": "IconMoney"
+  },
+  {
+    "name": "IconMoney2",
+    "exportName": "IconMoney2"
+  },
+  {
+    "name": "IconMoney3",
+    "exportName": "IconMoney3"
+  },
+  {
+    "name": "IconMoney4",
+    "exportName": "IconMoney4"
+  },
+  {
+    "name": "IconMoneyAdd",
+    "exportName": "IconMoneyAdd"
+  },
+  {
+    "name": "IconMoneyChange",
+    "exportName": "IconMoneyChange"
+  },
+  {
+    "name": "IconMoneyForbidden",
+    "exportName": "IconMoneyForbidden"
+  },
+  {
+    "name": "IconMoneyRecive",
+    "exportName": "IconMoneyRecive"
+  },
+  {
+    "name": "IconMoneyRemove",
+    "exportName": "IconMoneyRemove"
+  },
+  {
+    "name": "IconMoneySend",
+    "exportName": "IconMoneySend"
+  },
+  {
+    "name": "IconMoneyTick",
+    "exportName": "IconMoneyTick"
+  },
+  {
+    "name": "IconMoneyTime",
+    "exportName": "IconMoneyTime"
+  },
+  {
+    "name": "IconMoneys",
+    "exportName": "IconMoneys"
+  },
+  {
+    "name": "IconPercentageCircle",
+    "exportName": "IconPercentageCircle"
+  },
+  {
+    "name": "IconPercentageSquare",
+    "exportName": "IconPercentageSquare"
+  },
+  {
+    "name": "IconReceipt",
+    "exportName": "IconReceipt"
+  },
+  {
+    "name": "IconReceipt2",
+    "exportName": "IconReceipt2"
+  },
+  {
+    "name": "IconReceiptAdd",
+    "exportName": "IconReceiptAdd"
+  },
+  {
+    "name": "IconReceiptDiscount",
+    "exportName": "IconReceiptDiscount"
+  },
+  {
+    "name": "IconReceiptDisscount",
+    "exportName": "IconReceiptDisscount"
+  },
+  {
+    "name": "IconReceiptEdit",
+    "exportName": "IconReceiptEdit"
+  },
+  {
+    "name": "IconReceiptItem",
+    "exportName": "IconReceiptItem"
+  },
+  {
+    "name": "IconReceiptMinus",
+    "exportName": "IconReceiptMinus"
+  },
+  {
+    "name": "IconReceiptSearch",
+    "exportName": "IconReceiptSearch"
+  },
+  {
+    "name": "IconReceiptText",
+    "exportName": "IconReceiptText"
+  },
+  {
+    "name": "IconReceiptZikZak",
+    "exportName": "IconReceiptZikZak"
+  },
+  {
     "name": "IconSearch",
     "exportName": "IconSearch"
+  },
+  {
+    "name": "IconSecurityCard",
+    "exportName": "IconSecurityCard"
+  },
+  {
+    "name": "IconStrongbox",
+    "exportName": "IconStrongbox"
+  },
+  {
+    "name": "IconTag",
+    "exportName": "IconTag"
+  },
+  {
+    "name": "IconTag2",
+    "exportName": "IconTag2"
+  },
+  {
+    "name": "IconTicket",
+    "exportName": "IconTicket"
+  },
+  {
+    "name": "IconTicket2",
+    "exportName": "IconTicket2"
+  },
+  {
+    "name": "IconTicketDiscount",
+    "exportName": "IconTicketDiscount"
+  },
+  {
+    "name": "IconTicketExpired",
+    "exportName": "IconTicketExpired"
+  },
+  {
+    "name": "IconTicketStar",
+    "exportName": "IconTicketStar"
+  },
+  {
+    "name": "IconTransactionMinus",
+    "exportName": "IconTransactionMinus"
   },
   {
     "name": "IconUserAdd",
@@ -42,5 +294,41 @@
   {
     "name": "IconUsertag",
     "exportName": "IconUsertag"
+  },
+  {
+    "name": "IconWallet",
+    "exportName": "IconWallet"
+  },
+  {
+    "name": "IconWallet2",
+    "exportName": "IconWallet2"
+  },
+  {
+    "name": "IconWallet3",
+    "exportName": "IconWallet3"
+  },
+  {
+    "name": "IconWalletAdd",
+    "exportName": "IconWalletAdd"
+  },
+  {
+    "name": "IconWalletCheck",
+    "exportName": "IconWalletCheck"
+  },
+  {
+    "name": "IconWalletMinus",
+    "exportName": "IconWalletMinus"
+  },
+  {
+    "name": "IconWalletMoney",
+    "exportName": "IconWalletMoney"
+  },
+  {
+    "name": "IconWalletRemove",
+    "exportName": "IconWalletRemove"
+  },
+  {
+    "name": "IconWalletSearch",
+    "exportName": "IconWalletSearch"
   }
 ]
