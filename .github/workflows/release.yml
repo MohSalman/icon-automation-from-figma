@@ -41,6 +41,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run build-storybook
 
+      - name: Deploy Storybook to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+
       - name: Commit regenerated icons
         uses: stefanzweifel/git-auto-commit-action@v7
         with:

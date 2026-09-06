@@ -2,6 +2,7 @@
   "name": "icon-automation-from-figma",
   "version": "0.1.0",
   "description": "Tree-shakable React icon package generated from Figma via a CI pipeline.",
+  "homepage": "https://MohSalman.github.io/icon-automation-from-figma/",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/cjs/index.js",
